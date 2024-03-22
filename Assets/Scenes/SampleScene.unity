@@ -445,7 +445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8889493500306866404, guid: 472b96fd808ffc349ad58754dde7408b, type: 3}
-  _coloringDuration: 2
+  _cubesRecoloringDuration: 1
+  _cubesDelayDuration: 3
 --- !u!4 &1922841716
 Transform:
   m_ObjectHideFlags: 0

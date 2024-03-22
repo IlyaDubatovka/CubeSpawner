@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class RecoloringManager : MonoBehaviour
 {
-    private float _currentTime;
+    [HideInInspector] public float recoloringDuration;
+    [HideInInspector] public float delayDuration;
+
+    private float _cycleTimer;
     private Color _startColor;
     private Color _finalColor;
 
     private Renderer _renderer;
-    // Start is called before the first frame update
+
     void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -21,8 +23,14 @@ public class RecoloringManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _currentTime += Time.deltaTime;
-        _renderer.material.color = Color.Lerp(_startColor, _finalColor, _currentTime);
+        _cycleTimer += Time.deltaTime;
+        _renderer.material.color = Color.Lerp(_startColor, _finalColor, _cycleTimer/recoloringDuration);
+        if (_cycleTimer>=recoloringDuration+delayDuration)
+        {
+            _startColor = _finalColor;
+            _finalColor = GenerateNewColor();
+            _cycleTimer = 0;
+        }
     }
 
     private Color GenerateNewColor()

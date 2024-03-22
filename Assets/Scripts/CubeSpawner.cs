@@ -1,19 +1,24 @@
+
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;
 
-    [SerializeField] private float _coloringDuration;
-
+    [SerializeField] private float _cubesRecoloringDuration;
+    [SerializeField] private float _cubesDelayDuration;
     private GameObject _cube;
 
     private Color _finalColor;
-    // Start is called before the first frame update
 
+    private void Start()
+    {
+        _prefab.GetComponent<RecoloringManager>().recoloringDuration = _cubesRecoloringDuration;
+        _prefab.GetComponent<RecoloringManager>().delayDuration = _cubesDelayDuration;
+    }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.Space))
